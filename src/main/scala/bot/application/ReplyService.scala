@@ -6,6 +6,7 @@ import akka.http.scaladsl.client.RequestBuilding
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.model.headers._
 import akka.stream.Materializer
+import bot.application.json.MessagesJsonSupport
 import bot.line.model.{Messages, TextMessage}
 
 import scala.concurrent.{ExecutionContextExecutor, Future}
@@ -16,7 +17,7 @@ class ReplyService(accessToken: String)
                   (implicit val system: ActorSystem,
                    implicit val materializer: Materializer,
                    implicit val executionContext: ExecutionContextExecutor
-                  ) {
+                  ) extends MessagesJsonSupport {
 
   def replyMessage(token: String, message: String): Future[HttpResponse] = {
     val responseFuture: Future[HttpResponse] = Http().singleRequest(request(token, message))
