@@ -23,7 +23,7 @@ class ReplyService(accessToken: String)
     val responseFuture: Future[HttpResponse] = Http().singleRequest(request(token, message))
 
     responseFuture.andThen {
-      case Success(response) if response.status.isSuccess() => println(s"request succeed")
+      case Success(response) if response.status.isSuccess() => println(s"message sent!")
       case error => println(s"request failed: $error")
     }
   }

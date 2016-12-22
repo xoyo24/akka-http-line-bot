@@ -9,8 +9,8 @@ class EchoBot(val replyService: ReplyService) extends EventsJsonSupport {
 
   def routes: Route = {
     path("line" / "callback") {
-      (post & entity(as[Events])) { events =>
-        events.events.map { event =>
+      (post & entity(as[Events])) { request =>
+        request.events.map { event =>
           val replyToken = event.replyToken
           val message = event.message.text
 
