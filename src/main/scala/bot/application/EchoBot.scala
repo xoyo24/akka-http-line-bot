@@ -3,7 +3,7 @@ package bot.application
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import bot.application.json.EventsJsonSupport
-import bot.line.model.Events
+import bot.line.model.event.Events
 
 class EchoBot(val replyService: ReplyService) extends EventsJsonSupport {
 
