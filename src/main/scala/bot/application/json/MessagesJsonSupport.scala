@@ -1,7 +1,8 @@
 package bot.application.json
 
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
-import bot.line.model.{Messages, TextMessage}
+import bot.line.model.TextMessage
+import bot.line.model.send.{Messages, TextMessage}
 import spray.json.{DefaultJsonProtocol, RootJsonFormat}
 
 trait MessagesJsonSupport extends SprayJsonSupport with DefaultJsonProtocol {

@@ -2,7 +2,7 @@ package bot.application
 
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
-import bot.line.model.{Events, LINETextMessageEvent}
+import bot.line.model.event.{Events, LINETextMessageEvent}
 
 class EchoBot(val channelSecret: String, val replyService: ReplyService) extends BaseBot {
 
