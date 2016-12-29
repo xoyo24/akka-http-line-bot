@@ -20,7 +20,18 @@ class ReplyService(accessToken: String)
                   ) extends MessagesJsonSupport {
 
   def replyMessage(token: String, message: String): Future[HttpResponse] = {
-    val responseFuture: Future[HttpResponse] = Http().singleRequest(request(token, message))
+    val auth = headers.Authorization(OAuth2BearerToken(accessToken))
+    val content = Messages(
+      replyToken = token,
+      messages = List(TextMessage(text = message))
+    )
+
+    val request = RequestBuilding.Post(
+      uri = "https://api.line.me/v2/bot/message/reply",
+      content = content
+    ).withHeaders(auth)
+
+    val responseFuture: Future[HttpResponse] = Http().singleRequest(request)
 
     responseFuture.andThen {
       case Success(response) if response.status.isSuccess() => println(s"message sent!")
@@ -28,16 +39,4 @@ class ReplyService(accessToken: String)
     }
   }
 
-  private def request(token: String, text: String): HttpRequest = {
-    val auth = headers.Authorization(OAuth2BearerToken(accessToken))
-    val message = Messages(
-      replyToken = token,
-      messages = List(TextMessage(text = text))
-    )
-
-    RequestBuilding.Post(
-      uri = "https://api.line.me/v2/bot/message/reply",
-      content = message
-    ).withHeaders(auth)
-  }
 }

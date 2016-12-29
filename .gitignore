@@ -19,5 +19,5 @@ project/plugins/project/
 .scala_dependencies
 .worksheet
 /*.iml
-/.idea_modules
 /.idea
+/.idea_modules
