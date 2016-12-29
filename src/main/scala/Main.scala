@@ -12,7 +12,8 @@ object Main extends App {
   val config = ConfigFactory.load()
 
   val bot = new EchoBot(
-    new ReplyService(config.getString("bot.line.accessToken"))
+    channelSecret = config.getString("bot.line.channelSecret"),
+    replyService = new ReplyService(config.getString("bot.line.accessToken"))
   )
 
   Http().bindAndHandle(bot.routes, config.getString("http.interface"), config.getInt("http.port"))
