@@ -4,14 +4,14 @@ trait Source {
   val `type`: String
 }
 
-case class UserSource(userId: String) extends Source {
+case class UserSource(id: String) extends Source {
   override val `type`: String = "user"
 }
 
-case class GroupSource(userId: String) extends Source {
+case class GroupSource(id: String) extends Source {
   override val `type`: String = "group"
 }
 
-case class RoomSource(userId: String) extends Source {
+case class RoomSource(id: String) extends Source {
   override val `type`: String = "room"
 }

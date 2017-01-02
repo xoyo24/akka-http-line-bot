@@ -7,7 +7,6 @@ import akka.http.scaladsl.model._
 import akka.http.scaladsl.model.headers._
 import akka.stream.Materializer
 import bot.application.json.MessagesJsonSupport
-import bot.line.model.TextMessage
 import bot.line.model.send.{Messages, TextMessage}
 
 import scala.concurrent.{ExecutionContextExecutor, Future}

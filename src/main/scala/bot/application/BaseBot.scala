@@ -19,12 +19,11 @@ trait BaseBot extends EventsJsonSupport {
       case _ => reject(ValidationRejection("Invalid signature"))
     }
 
-  private def computeSignature(channelSecret: String, bodyString: String) = {
+  private def computeSignature(channelSecret: String, bodyString: String): String = {
     val key = new SecretKeySpec(channelSecret.getBytes(), "HmacSHA256")
     val mac = Mac.getInstance("HmacSHA256")
     mac.init(key)
     val source = mac.doFinal(bodyString.getBytes(StandardCharsets.UTF_8))
-    val signatureN = Base64.getEncoder.encodeToString(source)
-    signatureN
+    Base64.getEncoder.encodeToString(source)
   }
 }
