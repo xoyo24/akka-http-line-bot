@@ -1,4 +1,4 @@
-package bot.application.json
+package bot.line.json
 
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
 import bot.line.model.send.{Message, Messages, TextMessage}
@@ -7,7 +7,12 @@ import spray.json._
 trait MessagesJsonSupport extends SprayJsonSupport with DefaultJsonProtocol {
 
   implicit object MessageFormat extends RootJsonFormat[Message] {
-    def write(e: Message): JsValue = e.toJson
+    def write(e: Message): JsValue = e match {
+      case TextMessage(text) => JsObject(
+        "type" -> JsString(e.`type`),
+        "text" -> JsString(text)
+      )
+    }
 
     def read(value: JsValue): Message = value match {
       case JsArray(Vector(JsString(messageType), JsString(text))) =>
